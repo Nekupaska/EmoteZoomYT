@@ -1,4 +1,4 @@
-**MoveYTChatUP**
+**EmoteZoomYT**
 
 Displays a higher res preview of emotes when hovering over them in Youtube stream chats.
 Preview: https://twitter.com/NekuBaba/status/1540480716009512962
