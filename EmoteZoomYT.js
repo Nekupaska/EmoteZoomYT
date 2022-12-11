@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         EmoteZoomYT
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  Preview emotes
 // @author       Nekupaska
 // @match        http://www.youtube.com/watch?v=*
@@ -17,13 +17,14 @@ let checkExistChat = setInterval(function() {
         clearInterval(checkExistChat);
 
         ///
-        let zoom = $('<div id="emoteZoomYT" style="z-index:1000;background-color:white;display:none;position:absolute;padding:10px;border:1px solid grey;border-radius:10px;width:80px;height:80px;box-shadow:-1px -1px 10px grey inset"><img src="" style="width: 100%;border-radius:5px;border: 1px solid grey;"/></div></div>');
+        let zoom = $('<div id="emoteZoomYT" style="z-index:1000;background-color:white;display:none;position:absolute;padding:10px;border:1px solid grey;border-radius:10px;width:80px;height:min-content;box-shadow:-1px -1px 10px grey inset"><p style="margin:0;text-align:center;word-break: break-all;"></p><img src="" style="width: 100%;border-radius:5px;border: 1px solid grey;"/></div></div>');
         $("body").append(zoom);
 
         let x = 0;
         let y = 0;
         let offset=20;
         let src = "";
+        let emoteName = "";
 
         let iframe = $("#chatframe"); //finds chat iframe
 
@@ -39,6 +40,9 @@ let checkExistChat = setInterval(function() {
                 src = e.target.getAttribute("src");
                 src = src.replace("w24-h24-", "w240-h240-");
                 zoom.find("img").attr("src", src);
+                emoteName = e.target.getAttribute("shared-tooltip-text");
+                zoom.find("p").text(emoteName);
+
                 zoom.show();//show
             });
             iframe.contents().on("mouseleave",".emoji",function() {
